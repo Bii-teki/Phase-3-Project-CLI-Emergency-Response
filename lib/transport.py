@@ -8,11 +8,11 @@ from models import Patient, Transport, Hospital
 @click.command()
 @click.option(
     "--choice",
-    prompt="Enter your choice:\n1 to Respond to Resquests \n2 to View Patients with Request \n3 to Delete Request\n4 to View Patient\n5 to Check for Availble Hospitals\n6 to Check for patients in a particular hospital \n7 to Quit\n",
+    prompt="Enter your choice:\n1 to Respond to Resquests \n2 to View Patients with Request \n3 to Delete Request\n4 to View Patient\n5 to Check Hospitals Patients\n6 to Check for patients in a particular hospital \n7 to Quit\n",
     type=click.IntRange(1, 7),
 )
 def menu(choice):
-    print(f"Selected choice: {choice}")
+    # print(f"Selected choice: {choice}")
     if choice == 1:
         add_schedule(session)
     elif choice == 2:
@@ -24,10 +24,10 @@ def menu(choice):
     elif choice == 5:
         available_hospitals(session)
     elif choice == 6:
-        print("Option 6 selected")
+        
         patients_in_hospital(session)
     elif choice == 7:
-        print("Option 7 selected")
+        
         click.echo("Quitting the program.")
     else:
         click.echo("Invalid choice. Please select 1, 2, 3, 4, 5, 6, or 7.")
@@ -94,7 +94,7 @@ def view_patient(session):
         print("No patients found who have not been admitted.")
 
 
-def view_patients(Patient):
+def view_patients(session):
     name = session.query(Patient).all()
     for i in name:
         click.echo(f"{i.name}")

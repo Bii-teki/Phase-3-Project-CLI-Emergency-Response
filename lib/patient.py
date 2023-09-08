@@ -55,7 +55,7 @@ def add_patient(session):
 
         
 
-    # return patients  # Return the list of added patients
+  
 
 def view_patient(session):
     print("View this Patient...")
@@ -71,7 +71,7 @@ def view_patients(session):
     patients = session.query(Patient).all()
     if patients:
         for patient in patients:
-            click.echo(f"{patient.name}")
+            print(f"Patient Name: {patient.name}, Contact: {patient.contact}, Address: {patient.address}")
     else:
         print("No patients found in the database.")
 
