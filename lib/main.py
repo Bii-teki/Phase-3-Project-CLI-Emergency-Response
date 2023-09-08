@@ -3,6 +3,8 @@ from hospital import hospital_menu
 from transport import menu
 from patient import patient_menu
 
+
+print("Emergency Response Management System")
 @click.command()
 @click.option(
     "--choice",

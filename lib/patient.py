@@ -25,7 +25,7 @@ def patient_menu(choice):
 
 def add_patient(session):
     print("Adding Patients...")
-    patients = []  # Create a list to store patient objects
+    patients = []  
 
     
     name = click.prompt("Enter Name")
