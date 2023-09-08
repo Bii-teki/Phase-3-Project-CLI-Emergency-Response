@@ -11,6 +11,9 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 # session.query(Hospital).delete()
-# session.query(Patient).delete()
 # session.query(Transport).delete()
+# session.query(Patient).delete()
 
+session.commit()
+
+session.close()

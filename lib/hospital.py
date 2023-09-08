@@ -2,6 +2,7 @@ import click
 
 from seed import session
 from models import  Hospital
+import re
 
 @click.command()
 @click.option(
@@ -30,11 +31,18 @@ hospitals = []
 def add_hospital(session):
     print("Adding Hospital...")
     name = click.prompt("Enter Name")
-    contact = click.prompt("Enter Contact...")
+    if not re.match("^[A-Za-z]*$", name):
+            print ("Error! Make sure you only use letters in your name")
+            name = click.prompt("Enter Name")    
+            
+    contact = click.prompt("Enter Contact...")   
+    if not contact.isdigit():            
+             print("String contains only numeric characters.") 
+             contact = click.prompt("Enter Contact...")  
     location = click.prompt("Enter Location...")
     address = click.prompt("Enter Address...")
     bed_capacity = click.prompt("Enter bed capacity... ", type=int)
-
+    
     hospital = Hospital(
         name=name,
         contact=contact,

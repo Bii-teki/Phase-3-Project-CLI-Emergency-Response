@@ -1,4 +1,5 @@
 import click
+import re
 from seed import session
 from models import Patient
 
@@ -21,28 +22,40 @@ def patient_menu(choice):
         click.echo("Quitting the program.")
     else:
         click.echo("Invalid choice. Please select 1, 2, 3, 4, or 5.")
-patients =[]
+
 def add_patient(session):
-    print("Adding Patient...")
+    print("Adding Patients...")
+    patients = []  # Create a list to store patient objects
+
+    
     name = click.prompt("Enter Name")
     contact = click.prompt("Enter Contact...")
     location = click.prompt("Enter Location...")
     address = click.prompt("Enter Address...")
     admit = click.prompt("Is the patient admitted? (yes/no)").lower() == 'yes'
 
-    patient = Patient(
-        name=name,
-        contact=contact,
-        location=location,
-        address=address,
-        admit=admit
-    )
-    session.add(patient)
-    session.commit()
-    
-    patients.append(patient)
+    if not re.match("^[A-Za-z]*$", name):
+            print("Error! Make sure you only use letters in your name")
+    elif not contact.isdigit():
+            print("Contact should contain only numeric characters.")
+    else:
+            patient = Patient(
+                name=name,
+                contact=contact,
+                location=location,
+                address=address,
+                admit=admit
+            )
+            session.add(patient)
+            session.commit()
+            
+            patients.append(patient)
 
-    click.echo(f"Added {name} to the database.")
+            click.echo(f"Added {name} to the database.")
+
+        
+
+    # return patients  # Return the list of added patients
 
 def view_patient(session):
     print("View this Patient...")
